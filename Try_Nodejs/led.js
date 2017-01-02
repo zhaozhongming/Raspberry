@@ -5,10 +5,10 @@ var interval = 0;
 var currentValue = false;
 
 var rl = readLine.createInterface({input: process.stdin,output: process.stdout});
-gpio.setup(11, gpio.DIR_OUT, notQuiteReady);
+gpio.setup(38, gpio.DIR_OUT, notQuiteReady);
 
 function notQuiteReady() {
-	gpio.setup(12, gpio.DIR_OUT, ready);
+	gpio.setup(40, gpio.DIR_OUT, ready);
 }
 
 ///////////////////////////////Azure IoT message////////////////////////////////////////////////
@@ -34,20 +34,16 @@ var connectCallback = function (err) {
 		client.on('message', function (msg) {
        console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
        client.complete(msg, printResultFor('completed'));
-
-		//control the led here!!!!!!!!!!!!!!!!!!!!!!!!!
-		switch (msg.data) {
-				case "1":
-					setPin(true, askWhatToDo);
-					break;
-				case "0":
-					setPin(false, askWhatToDo);
-					break;
-				case "q":
-					quit();
-					return;
-				break;
+		var d = msg.data;
+		if (d.indexOf("on")>-1) {
+			setPin(true, askWhatToDo);
 		}
+		else if (d.indexOf("off")>-1) {
+			setPin(false, askWhatToDo);
+		}
+		else {
+		}
+		
      });
    }
  };
@@ -91,8 +87,8 @@ function askWhatToDo() {
 }
 
 function setPin(on, callback) {
-			gpio.write(11, on, function(err) {
-						gpio.write(12, !on, function(err) {
+			gpio.write(38, on, function(err) {
+						gpio.write(40, !on, function(err) {
 							if (err) throw err;
 							if (callback) callback();
 						});});}
