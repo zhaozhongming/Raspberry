@@ -1,0 +1,4 @@
+http://raspberrypi.stackexchange.com/questions/450/how-can-i-connect-to-a-usb-serial-device
+
+ 
+http://blog.csdn.net/xukai871105/article/details/22713925
