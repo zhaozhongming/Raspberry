@@ -2,3 +2,7 @@ http://raspberrypi.stackexchange.com/questions/450/how-can-i-connect-to-a-usb-se
 
  
 http://blog.csdn.net/xukai871105/article/details/22713925
+
+
+new findings!!!
+http://raspberrypi.stackexchange.com/questions/47671/why-my-program-wont-communicate-through-ttyama0-on-raspbian-jessie
