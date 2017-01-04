@@ -1,0 +1,14 @@
+https://www.raspberrypi.org/forums/viewtopic.php?t=29554
+
+http://www.aichengxu.com/view/4402943
+
+minicom -b 115200 -o -D /dev/ttyAMA0
+
+
+cat /home/pi/Projects/PM25/notes.txt>/dev/ttyAMA0
+
+
+1. sudo raspi-conf, select serial Port , and NO
+
+2. sudo nano /boot/config.txt, make sure it is like this:
+enable_uart=1

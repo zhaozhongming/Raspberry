@@ -1,3 +1,8 @@
+How to set dns:
+nano /etc/resolv.conf
+
+
+
 http://raspberrypi.stackexchange.com/questions/450/how-can-i-connect-to-a-usb-serial-device
 
  

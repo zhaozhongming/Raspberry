@@ -20,7 +20,7 @@ var connectCallback = function (err) {
    if (err) {
      console.log('Could not connect: ' + err);
    } else {
-     console.log('Azure IoThub connected');
+     console.log('Azure IoThub connected, Ready to go!');
 
      /* Create a message and send it to the IoT Hub every second
      setInterval(function(){
@@ -37,18 +37,11 @@ client.open(connectCallback);
 
 
 
-//send data to Azure IoT
-				//var iPM25 = pm_air_10;
-	         //var data = JSON.stringify({ deviceId: 'Raspberry1', PM25: iPM25 });
-	         //var message = new Message(data);
-	         //console.log("Sending message: " + message.getData());
-         		//client.sendEvent(message, printResultFor('send'));
-
 
 
 ///////////////////////////////////////setup sensor///////////////////////////////////
 // 树莓派只有一个串口,默认被用来做console了,需要先禁用
-var SERIAL_PORT = '/dev/ttyAMA0';
+var SERIAL_PORT = '/dev/serial0';
 // G3的数据包长度为24字节
 var PACKAGE_LEN = 24;
 
@@ -77,12 +70,12 @@ var serialPort = new SerialPort(SERIAL_PORT, {
 });
 
 serialPort.on("open", function () {
-    console.log(SERIAL_PORT + ' open success:' + serialPort.options.baudRate + " bytes to read:" + serialPort.BytesToRead);
+    console.log(SERIAL_PORT + ' open success:' + serialPort.options.baudRate + " Ready to go!");
 
     // 处理完整的package
     var handle_package = function(package) {
         console.log('#####################');
-        console.log(package);
+        //console.log(package);
         // data length should be 24bytes
         if (package.length !== 24) {
             console.log('data package length[24, %d]', package.length);
@@ -129,6 +122,14 @@ serialPort.on("open", function () {
 
             console.log('大气环境 -> [%d, %d, %d]', pm_air_1_0, pm_air_2_5, pm_air_10);
 
+//send data to Azure IoT
+				var iPM25 = pm_air_10;
+	         var data = JSON.stringify({ deviceId: 'Raspberry1', PM25: iPM25 });
+	         var message = new Message(data);
+         		client.sendEvent(message, printResultFor(message.getData()));
+
+
+
             // 数据7,8,9保留
         } else {
             console.log('RECV data err: ');
@@ -139,9 +140,7 @@ serialPort.on("open", function () {
     var whole_package = new Buffer(PACKAGE_LEN);
     var package_index = 0;
     serialPort.on('data', function(data) {
-                    console.log('#####start data#####');
-
-        console.log(data);
+        //console.log(data);
 
         for (var i = 0; i < data.length; i++) {
             // check package header

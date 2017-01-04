@@ -41,8 +41,17 @@ var connectCallback = function (err) {
 		else if (d.indexOf("off")>-1) {
 			setPin(false, askWhatToDo);
 		}
-		else {
-		}
+		else if (d.indexOf("fancy")>-1) {
+			if (interval !== 0) {
+				clearInterval(interval);
+				break;
+			}
+
+			interval = setInterval(function () {
+								currentValue = !currentValue; 
+								setPin(currentValue);
+						}, 500);
+		}	
 		
      });
    }
@@ -58,7 +67,7 @@ function ready() {
 }
 
 function askWhatToDo() {
-		rl.question("Please enter 1 for on and 0 for off, f for fancy, q for quit: \r\n",
+		rl.question("Please enter 1 or 0 to turn on/off, f for fancy, q for quit: \r\n",
 				 function (answer) {
 						switch (answer) {
 							case "1":setPin(true, askWhatToDo);
