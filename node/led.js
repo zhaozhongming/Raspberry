@@ -31,6 +31,8 @@ var connectCallback = function (err) {
      console.log('Could not connect: ' + err);
    } else {
      console.log('by the way, the Azure IoThub is connected');
+
+
 		client.on('message', function (msg) {
        console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
        client.complete(msg, printResultFor('completed'));
@@ -44,7 +46,6 @@ var connectCallback = function (err) {
 		else if (d.indexOf("fancy")>-1) {
 			if (interval !== 0) {
 				clearInterval(interval);
-				break;
 			}
 
 			interval = setInterval(function () {
