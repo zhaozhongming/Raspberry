@@ -1,5 +1,8 @@
 How to set dns:
-nano /etc/resolv.conf
+
+sudo nano /etc/resolv.conf
+
+sudo nano /etc/dhcpcd.conf
 
 
 

@@ -41,7 +41,8 @@ client.open(connectCallback);
 
 ///////////////////////////////////////setup sensor///////////////////////////////////
 // 树莓派只有一个串口,默认被用来做console了,需要先禁用
-var SERIAL_PORT = '/dev/serial0';
+//var SERIAL_PORT = '/dev/serial0';
+var SERIAL_PORT = '/dev/ttyUSB0';
 // G3的数据包长度为24字节
 var PACKAGE_LEN = 24;
 

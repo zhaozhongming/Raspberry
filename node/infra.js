@@ -1,5 +1,7 @@
 var gpio = require('rpi-gpio');
-
+var interval = 0;
+var currentValue = false;
+var index = 1;
 
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
@@ -18,25 +20,12 @@ var connectCallback = function (err) {
  };
 
 client.open(connectCallback);
-
  
-//gpio.setup(32, gpio.DIR_IN, readInput);
- 
-gpio.setup(38, gpio.DIR_OUT, notQuiteReady);
+gpio.setup(37, gpio.DIR_OUT, notQuiteReady);
 
 function notQuiteReady() {
 	
 }
-
-/*
-function readInput() {
-	  gpio.read(32, function(err, value) {
-		console.log('anyone here ' + value);
-			if (err) throw err;
-			setTimeout(readInput, 5000);
-    	});
-}*/
-
 
 function printResultFor(op) {
    return function printResult(err, res) {
@@ -46,21 +35,23 @@ function printResultFor(op) {
  }
 
 function init() {
+	console.log('start');
 	gpio.on('change', function(channel, value) {
 		if (value) {
 	   		console.log('freeze! low your weapon down!');
-			gpio.write(38, value, function(err) {
+			gpio.write(37, value, function(err) {
 				if (err) throw err;
 			});
 
 			//send message to IoT
-			var data = JSON.stringify({ deviceId: 'Raspberry1', alarm: 1 });
+			var data = JSON.stringify({ deviceId: 'Raspberry1', alarm: index++ });
 	         var message = new Message(data);
          		client.sendEvent(message, printResultFor(message.getData()));
-
+			
 		}
 		else {
-			gpio.write(38, value, function(err) {
+			console.log('ok, get out of here');
+			gpio.write(37, value, function(err) {
 				if (err) throw err;
 			});
 		}
@@ -71,4 +62,4 @@ gpio.setup(32, gpio.DIR_IN, gpio.EDGE_BOTH);
 
 console.log('initializing.......');
 
-setTimeout(init(), 10000);
+setTimeout(init, 1000);

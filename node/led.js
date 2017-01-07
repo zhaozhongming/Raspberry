@@ -5,7 +5,7 @@ var interval = 0;
 var currentValue = false;
 
 var rl = readLine.createInterface({input: process.stdin,output: process.stdout});
-gpio.setup(38, gpio.DIR_OUT, notQuiteReady);
+gpio.setup(37, gpio.DIR_OUT, notQuiteReady);
 
 function notQuiteReady() {
 	gpio.setup(40, gpio.DIR_OUT, ready);
@@ -28,7 +28,7 @@ function printResultFor(op) {
 
 var connectCallback = function (err) {
    if (err) {
-     console.log('Could not connect: ' + err);
+     console.log('Could not connect Azure: ' + err);
    } else {
      console.log('by the way, the Azure IoThub is connected');
 
@@ -68,14 +68,15 @@ function ready() {
 }
 
 function askWhatToDo() {
-		rl.question("Please enter 1 or 0 to turn on/off, f for fancy, q for quit: \r\n",
+		rl.question("Please enter 1 or 0 to turn on/off, 2 for fancy, q for quit: \r\n",
 				 function (answer) {
 						switch (answer) {
-							case "1":setPin(true, askWhatToDo);
+							case "1":
+								setPin(true, askWhatToDo);
 								break;
 							case "0":setPin(false, askWhatToDo);
 								break;
-							case "f":
+							case "2":
 										if (interval !== 0) {
 											clearInterval(interval);
 											break;
@@ -97,7 +98,7 @@ function askWhatToDo() {
 }
 
 function setPin(on, callback) {
-			gpio.write(38, on, function(err) {
+			gpio.write(37, on, function(err) {
 						gpio.write(40, !on, function(err) {
 							if (err) throw err;
 							if (callback) callback();
