@@ -18,7 +18,12 @@ http://spellfoundry.com/2016/05/29/configuring-gpio-serial-port-raspbian-jessie-
 http://raspberrypi.stackexchange.com/questions/45570/how-do-i-make-serial-work-on-the-raspberry-pi3
 
 
+<<<<<<< HEAD
 /etc/transmission-daemon/settings.json
 
 
 http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/desktop-shortcuts
+=======
+Slides:
+https://approd-my.sharepoint.com/personal/zhaoz1_airproducts_com/_layouts/15/guestaccess.aspx?guestaccesstoken=3rgpfC6OXyqvxi1aLWvDAQDGiqCdHaItOMY7D1H65k4%3d&docid=2_15871c811569d49ce9718474ee92b0613&rev=1
+>>>>>>> cbb50eae784efc3d7c377a1c84917777dee1511c
