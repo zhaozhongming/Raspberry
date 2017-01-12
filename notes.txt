@@ -16,3 +16,9 @@ new findings!!!
 http://raspberrypi.stackexchange.com/questions/47671/why-my-program-wont-communicate-through-ttyama0-on-raspbian-jessie
 http://spellfoundry.com/2016/05/29/configuring-gpio-serial-port-raspbian-jessie-including-pi-3/
 http://raspberrypi.stackexchange.com/questions/45570/how-do-i-make-serial-work-on-the-raspberry-pi3
+
+
+/etc/transmission-daemon/settings.json
+
+
+http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/desktop-shortcuts
