@@ -10,6 +10,7 @@
 
 #include <bcm2835.h>
 #include <stdio.h>
+#include <iostream>
 #define uchar unsigned char
 #define uint unsigned int
 
@@ -22,19 +23,19 @@
 /*
 I heart U
 
-1000000000001001		80 09
-1000110011001001	8C C9
-1001111111101001		9F E9
-1001111111101001			9F E9	
-1001111111101001			9F E9
-1000111111001001			8F C9
-1000011110001001		87 89
-1000001100001111		83 0F
+1000000000001001		x80 09
+1000110011001001	   x8C C9
+1001111111101001		x9F E9
+1001111111101001		x9F E9	
+1001111111101001		x9F E9
+1000111111001001		x8F C9
+1000011110001001		x87 89
+1000001100000110		x83 06
 
 */
 uchar disp1[2][8] = {
-	{0x80,0x8C,0x9F,0x9F,0x9F,0x8F,0x87,0x83},
-	{0x09,0xC9,0xE9,0xE9,0xE9,0xC9,0x89,0x0F}
+	{0x00,0x8C,0x9F,0x9F,0x9F,0x8F,0x87,0x83},
+	{0x00,0xC9,0xE9,0xE9,0xE9,0xC9,0x89,0x06}
 };
 
 void Delay_xms(uint x)
@@ -91,8 +92,7 @@ void main(void)
 	bcm2835_spi_begin();
 	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);      // The default
 	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);                   // The default
-	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_65536); // The default
-
+	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_256); // The default
 
 	bcm2835_gpio_fsel(Max7219_pinCS, BCM2835_GPIO_FSEL_OUTP); 
 
@@ -100,23 +100,23 @@ void main(void)
 
 	Delay_xms(50);
 	Init_MAX7219();
+	
+	double a;
+	cin >> a;
 
-
-
-	while(1)
+	while(a!='q')
  	{
-Init_MAX7219();
-//Write_Max7219(1 , 0x88,1,0x7a);
-/*
-		for(i = 1;i < 2;i++)
-		{
-			Write_Max7219(i , disp1[0][i-1],i,disp1[1][i-1]);
-			
-		}
-*/
+		for(i = 1;i<9;i++)
+			Write_Max7219(i , disp1[1][i-1],i,disp1[0][i-1]);
+		Delay_xms(1000);
 
-Delay_xms(1000);
+		for(i = 1;i<9;i++)
+			Write_Max7219(i , 0x00,i, 0x00);
+		Delay_xms(1000);
 	}
+	
+	for(i = 1;i<9;i++)
+		Write_Max7219(i , 0x00,i, 0x00);
 
 	bcm2835_spi_end();
 	bcm2835_close();

@@ -121,10 +121,10 @@ serialPort.on("open", function () {
             // PM10(大气环境下)
             var pm_air_10 = package[index++] * 256 + package[index++];
 
-            console.log('大气环境 -> [%d, %d, %d]', pm_air_1_0, pm_air_2_5, pm_air_10);
+            console.log('颗粒物指标 -> [%d, %d, %d]', pm_air_1_0, pm_air_2_5, pm_air_10);
 
 				//send data to Azure IoT
-				var iPM25 = pm_air_10;
+				var iPM25 = pm_air_2_5;
 	         var data = JSON.stringify({ deviceId: 'Raspberry1', PM25: iPM25 });
 	         var message = new Message(data);
          		//client.sendEvent(message, printResultFor(message.getData()));
