@@ -127,7 +127,7 @@ serialPort.on("open", function () {
 				var iPM25 = pm_air_2_5;
 	         var data = JSON.stringify({ deviceId: 'Raspberry1', PM25: iPM25 });
 	         var message = new Message(data);
-         		//client.sendEvent(message, printResultFor(message.getData()));
+         	client.sendEvent(message, printResultFor(message.getData()));
 
 
 

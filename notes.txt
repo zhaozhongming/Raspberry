@@ -27,3 +27,20 @@ http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/desktop-s
 Slides:
 https://approd-my.sharepoint.com/personal/zhaoz1_airproducts_com/_layouts/15/guestaccess.aspx?guestaccesstoken=3rgpfC6OXyqvxi1aLWvDAQDGiqCdHaItOMY7D1H65k4%3d&docid=2_15871c811569d49ce9718474ee92b0613&rev=1
 
+
+LED MATRIX
+1	5v		3.3v
+2
+3
+4
+5
+6
+7
+8
+9
+10			MOSI
+11			
+12	CE0	SCK
+13			GND		
+		
+		

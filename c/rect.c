@@ -10,7 +10,6 @@
 
 #include <bcm2835.h>
 #include <stdio.h>
-#include <iostream>
 #define uchar unsigned char
 #define uint unsigned int
 
@@ -102,9 +101,8 @@ void main(void)
 	Init_MAX7219();
 	
 	double a;
-	cin >> a;
 
-	while(a!='q')
+	while(1)
  	{
 		for(i = 1;i<9;i++)
 			Write_Max7219(i , disp1[1][i-1],i,disp1[0][i-1]);
