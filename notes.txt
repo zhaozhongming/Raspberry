@@ -43,4 +43,6 @@ LED MATRIX
 12	CE0	SCK
 13			GND		
 		
-		
+
+Access google:
+http://www.xiazaiba.com/jiaocheng/972.html
